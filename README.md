@@ -157,7 +157,7 @@ numbers:
   about the cartridge — which is precisely the trap this project fell
   into before the check existed.
 - The ROM-resident map parses to the right dimensions, and the marked
-  start cell resolves to open floor facing north.
+  start cell resolves to open floor facing south.
 - A closed, symmetric room: casting a ray at every column across the
   full field of view at a flat wall reports the *same* perpendicular
   distance for all of them — the actual numeric proof there is no
