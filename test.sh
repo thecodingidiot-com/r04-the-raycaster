@@ -193,6 +193,60 @@ int main(void)
         hit.perp_dist, 5.5, 0.02);
 
     /*
+    ** Handedness. The map's y axis points down, so a player facing
+    ** east has south on their right -- and the camera plane is built
+    ** from that vector, so getting its sign wrong mirrors the entire
+    ** screen rather than distorting it, which is exactly why nothing
+    ** else in this file would notice.
+    **
+    ** Asserted twice: once on the vector, once on a picture. The map
+    ** below presses a wall against the NORTH side and leaves the
+    ** south open, with the camera facing east -- north is then the
+    ** player's LEFT, so the near wall must land in the left half of
+    ** the screen.
+    */
+    camera_init(&cam, FIX(1.5), FIX(2.5), 0);
+    check_int("facing east, right is south (+y), not north",
+        (long)cam.right.y, 4096);
+    {
+        t_map       hall;
+        int         y;
+        int         x;
+        long        near_side = 0;
+        long        far_side = 0;
+        char const  *hrows[7] = {
+            "1111111111111", "1111111111111", "1000000000001",
+            "1000000000001", "1000000000001", "1000000000001",
+            "1111111111111"
+        };
+
+        hall.rows = 7;
+        hall.cols = 13;
+        y = 0;
+        while (y < 7) {
+            x = 0;
+            while (x < 13) {
+                hall.grid[y][x] = hrows[y][x];
+                x++;
+            }
+            hall.grid[y][13] = '\0';
+            y++;
+        }
+        camera_init(&cam, FIX(1.5), FIX(2.5), 0);
+        col = 0;
+        while (col < WINDOW_W) {
+            hit = raycaster_cast(&cam, &hall, col);
+            if (col < WINDOW_W / 4)
+                near_side += hit.perp_dist;
+            if (col >= WINDOW_W - WINDOW_W / 4)
+                far_side += hit.perp_dist;
+            col++;
+        }
+        check_int("the wall on the player's left renders on the left of the screen",
+            near_side < far_side, 1);
+    }
+
+    /*
     ** Every delta fed to fix_mul has to stay small enough that the
     ** 32-bit product cannot wrap. safe_inv()'s ceiling is what
     ** guarantees it, so assert the guarantee rather than trusting it:
