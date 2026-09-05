@@ -5,12 +5,15 @@
 
 /*
 ** One byte of angle, so a "turn speed" is a number of 256ths of a
-** full circle. 4 is a little over five degrees per frame -- coarse,
-** but this renderer will not be producing many frames per second to
-** spread a finer step across.
+** full circle. 12 is about seventeen degrees per frame -- very
+** coarse, and deliberately so: at roughly one frame every two
+** seconds there is no point spreading a fine step across frames that
+** arrive twice a minute. A quarter turn takes five frames this way
+** instead of sixteen. The step sizes here are set by the measured
+** frame rate, not by taste.
 */
-# define TURN_SPEED 4
-# define MOVE_SPEED FIX(0.12)
+# define TURN_SPEED 12
+# define MOVE_SPEED FIX(0.35)
 
 static void handle_input(t_camera *cam, u16 pad)
 {
