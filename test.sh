@@ -138,8 +138,8 @@ int main(void)
     check_int("the marked start cell is open floor",
         map_is_wall(&map, fix_int(map.start_pos.x), fix_int(map.start_pos.y)), 0);
     check_int("out of bounds is a wall", map_is_wall(&map, -1, 0), 1);
-    check_int("the N marker resolves to the north-facing angle",
-        map.start_angle, 192);
+    check_int("the S marker resolves to the south-facing angle",
+        map.start_angle, 64);
 
     /*
     ** A closed 5x5 room, camera centred and facing one flat wall:
