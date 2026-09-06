@@ -1,5 +1,5 @@
 #!/bin/bash
-# r04 — The Raycaster on the SNES / test.sh
+# r04 — The 65816 Port / test.sh
 #
 # Builds the real cartridge with PVSnesLib, then checks the fixed-point
 # and DDA math deterministically on the HOST -- fixed.h, vec2.c,
@@ -33,7 +33,7 @@ cleanup() { rm -rf "$WORK_DIR"; }
 trap cleanup EXIT
 
 hr() { echo "────────────────────────────────────────────────────────────────"; }
-banner() { hr; echo "  r04 — The Raycaster on the SNES / test.sh"; hr; }
+banner() { hr; echo "  r04 — The 65816 Port / test.sh"; hr; }
 pass() { printf "  ${C_GREEN}PASS${C_RESET}  %s\n" "$1"; pass_count=$((pass_count + 1)); }
 fail() {
     printf "  ${C_RED}FAIL${C_RESET}  %s\n" "$1"
