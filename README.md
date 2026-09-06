@@ -1,6 +1,6 @@
-# r04-the-raycaster
+# r04-the-65816-port
 
-Companion repository for **r04 — The Raycaster on the SNES** at
+Companion repository for **r04 — The 65816 Port** at
 [thecodingidiot.com](https://thecodingidiot.com) — the fourth chapter of
 Part III, The Rendering Journey.
 
@@ -18,7 +18,7 @@ Working through r04 alongside the implementation pages? Build the
 cartridge step by step, then run the tester.
 
 ```bash
-git clone https://github.com/thecodingidiot-com/r04-the-raycaster.git r04-practice
+git clone https://github.com/thecodingidiot-com/r04-the-65816-port.git r04-practice
 cd r04-practice
 export PVSNESLIB_HOME=/path/to/pvsneslib     # the directory holding devkitsnes/ and pvsneslib/
 cd solution && make
